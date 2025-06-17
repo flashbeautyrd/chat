@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Simple</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      width: 400px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      background: #e9ecef;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+
+    .message.user {
+      background: #d1e7dd;
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .chat-input button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Chat Simple</div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Escribe un mensaje..." />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById("messages");
+    const input = document.getElementById("messageInput");
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (text === "") return;
+
+      const msg = document.createElement("div");
+      msg.className = "message user";
+      msg.textContent = text;
+      messages.appendChild(msg);
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
